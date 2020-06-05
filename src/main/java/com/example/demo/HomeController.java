@@ -33,6 +33,17 @@ public class HomeController {
         return "home";
     }
 
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @RequestMapping("/logout")
+    public String logout() {
+        return "redirect:/login?logout=true";
+    }
+
+
     @GetMapping("/new-car")
     public String displayCarForm(Model model) {
         Car aCar = new Car();
