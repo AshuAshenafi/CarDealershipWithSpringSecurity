@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>newCategory</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<nav th:replace="layouts :: navbar"></nav>
+
+<div class="container">
+    <br/>
+    <br/>
+    <br/>
+
+    <table class="table">
+        <form th:action="@{/save-category}" method="post" th:object="${category}">
+            <input type="hidden" th:field="${category.categoryId}">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Enter New Category here?</th>
+            </tr>
+            </thead>
+            <tbody>
+            <br/>
+            <tr>
+                <th>
+                    <div class="form-group row">
+                        Title: <input type="text" th:field="*{categoryTitle}" placeholder="Category title" style="width: 100%"/><br/>
+                            <span style="color: red" th:if="${#fields.hasErrors('categoryTitle')}"
+                                  th:errors="${category.categoryTitle}">
+                            </span>
+                    </div>
+
+                </th>
+            </tr>
+            <br/>
+            <tr>
+                <th>
+                    <div th:if="${category.categoryId == 0}">
+                        <div class="form-group row">
+                            <br/>
+                            <button class="btn btn-info col-2" type="submit">Enter Category</button>
+                            <br/>
+                        </div>
+                    </div>
+
+                    <div th:unless="${category.categoryId == 0}">
+                        <div class="form-group row">
+                            <br/>
+                            <button class="btn btn-info col-2" type="submit">Update Category</button>
+                            <br/>
+                        </div>
+                    </div>
+
+
+
+                </th>
+            </tr>
+            </tbody>
+
+        </form>
+    </table>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

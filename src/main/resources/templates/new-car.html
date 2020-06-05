@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>bootstrap</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+<nav th:replace="layouts :: navbar"></nav>
+<div class="container">
+    <br/>
+<table class="table">
+
+
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Enter New Car Here</th>
+            </tr>
+        </thead>
+    <tbody>
+    <br/>
+        <form action="/save-car" th:object="${car}" method="post">
+            <input type="hidden" th:field="${car.carId}"/>
+            <input type="hidden" th:field="${car.category.categoryId}"/>
+            <br/>
+            <tr>
+                <td>
+                </td>
+            </tr>
+                <tr>
+                    <td>
+                        <div class="form-group row">
+
+
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Manufacturer </span>
+                                </div>
+                                    <input type="text" class="form-control" arial-label="Sizing example input"
+                                           aria-describedby="inputGroup-sizing-default" th:field="${car.manufacturer}"
+                                           style="width: 50%"/>
+                                    <span style="color: red" th:if="${#fields.hasErrors('manufacturer')}"
+                                          th:errors="${car.manufacturer}">
+                                </span>
+
+                            </div>
+
+
+                        </div>
+                    </td>
+                </tr>
+            <tr>
+                <td>
+                    <div class="form-group row">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" for="inputGroup-sizing-default">Model </span>
+                            </div>
+                        <input type="text" th:field="${car.model}" style="width: 50%"/>
+                        <span style="color: red" th:if="${#fields.hasErrors('model')}"
+                              th:errors="${car.model}">
+                        </span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group row">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default 3">Year </span>
+                            </div>
+                        <input type="number" placeholder="Year" th:field="${car.year}" style="width: 50%"/>
+                        <span style="color: red" th:if="${#fields.hasErrors('year')}"
+                              th:errors="${car.year}">
+                </span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div th:if="${car.carId == 0}">
+
+                        <div class="form-group row">
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroup-sizing-default">Category</label>
+                                </div>
+
+                                <select th:field="*{category}" style="width: 50%">
+                                    <!--                    <select th:field="*{category}" multiple="single">-->
+                                    <option th:each="category : ${allCategories}" th:value="${category.categoryId}"
+                                            th:text="${category.categoryTitle}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                    <div class="form-group row">
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default 4">Description </span>
+                            </div>
+
+                        <textarea rows="3" type="text" th:field="${car.description}" style="width: 50%"/>
+
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div th:if="${car.carId == 0}">
+                        <button class="btn btn-info col-2" type="submit">ENTER CAR</button>
+                    </div>
+
+
+                    <div th:unless="${car.carId == 0}">
+                        <button class="btn btn-info col-2" type="submit">UPDATE CAR</button>
+                    </div>
+                </td>
+            </tr>
+
+    </form>
+
+    </tbody>
+
+</table>
+
+<!--        <input type="text" th:field="${car.category.categoryTitle}">-->
+
+
+
+
+
+
+
+
+
+
+
+
+<!--        <div class="form-group row">-->
+<!--                    <select th:field="*{category}" multiple="multiple">-->
+<!--                        <option th:each="category : ${allCategories}" th:value="${category.categoryId}"-->
+<!--                                th:text="${category.categoryTitle}"></option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--        -->
+
+
+
+
+<!--        <div th:unless="${car.carId == 0}">-->
+<!--            -->
+<!--        </div>-->
+
+
+
+<!--        if the id is not zero it means it is update process so show the below select option-->
+
+
+
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>
