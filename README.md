@@ -1,1 +1,3 @@
-"#Car Dealership Application - Week six Challenge. by Ashenafi Maru" 
+#Car Dealership Application - with Spring Security
+Week six Challenge. 
+by Ashenafi Maru
